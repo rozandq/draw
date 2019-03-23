@@ -76,15 +76,19 @@ export class LoginPage implements OnInit {
       await this.loading.present();
     }
   }
-  
   async webGoogleLogin(): Promise<void> {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
       const credential = await this.afAuth.auth.signInWithPopup(provider);
+      console.log(credential.user);
+      firebase.firestore().doc(`/userProfile/${credential.user.uid}`).set({
+        username: credential.user.displayName,
+        email: credential.user.email
+      });
       this.router.navigateByUrl('home');
       this.cookieService.put('uid', credential.user.uid);
-    } catch(err) {
-      console.log(err)
-    }
+      } catch (err) {
+          console.log(err);
+      }
   }
 }

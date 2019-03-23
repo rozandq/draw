@@ -5,7 +5,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
+import {CookieService} from 'ngx-cookie';
 
 @Component({
   selector: 'app-signup',
@@ -22,7 +25,8 @@ export class SignupPage implements OnInit {
     private alertCtrl: AlertController,
     private formBuilder: FormBuilder,
     private router: Router,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private cookieService: CookieService
   ) {
     this.signupForm = this.formBuilder.group({
       email: [
@@ -33,6 +37,10 @@ export class SignupPage implements OnInit {
         '',
         Validators.compose([Validators.minLength(6), Validators.required]),
       ],
+      username: [
+          '',
+          Validators.compose([Validators.minLength(6), Validators.required]),
+      ]
     });
   }
 
@@ -45,7 +53,7 @@ export class SignupPage implements OnInit {
     } else {
       const email: string = signupForm.value.email;
       const password: string = signupForm.value.password;
-      const username: string = signupForm.value.username;
+      const username = signupForm.value.username;
       this.authService.signupUser(email, password, username).then(
         () => {
           this.loading.dismiss().then(() => {
@@ -67,13 +75,19 @@ export class SignupPage implements OnInit {
     }
   }
 
-  async webGoogleSignin(): Promise<void> {
-    try {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      const credential = await this.afAuth.auth.signInWithPopup(provider);
-      console.log(credential.user.uid);
-    } catch (err) {
-      console.log(err);
-    }
+  async webGoogleSignup(): Promise<void> {
+      try {
+          const provider = new firebase.auth.GoogleAuthProvider();
+          const credential = await this.afAuth.auth.signInWithPopup(provider);
+          console.log(credential.user);
+          firebase.firestore().doc(`/userProfile/${credential.user.uid}`).set({
+              username: credential.user.displayName,
+              email: credential.user.email
+          });
+          this.router.navigateByUrl('home');
+          this.cookieService.put('uid', credential.user.uid);
+      } catch (err) {
+          console.log(err);
+      }
   }
 }

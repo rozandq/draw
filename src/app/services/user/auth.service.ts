@@ -5,6 +5,8 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 import { CookieService } from 'ngx-cookie';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {Error} from 'tslint/lib/error';
 
 
 @Injectable({
@@ -22,20 +24,21 @@ export class AuthService {
   }
 
   signupUser(email: string, password: string, username: string): Promise<any> {
-    return firebase.auth().createUserWithEmailAndPassword(email, password).then(newUserCredential => {
-      firebase.firestore().doc(`/userProfile/${newUserCredential.user.uid}`).set({ email });
-      
+      return firebase.auth().createUserWithEmailAndPassword(email, password).then(newUserCredential => {
+          firebase.firestore().doc(`/userProfile/${newUserCredential.user.uid}`).set({ username: name,
+              email: email,
+              uid: newUserCredential.user.uid });
     }).catch(error => {
       console.error(error);
       throw new Error(error);
     });
   }
 
-  resetPassword(email:string): Promise<void> {
+  resetPassword(email: string): Promise<void> {
     return firebase.auth().sendPasswordResetEmail(email);
   }
 
-  logoutUser():Promise<void> {
+  logoutUser(): Promise<void> {
     return firebase.auth().signOut();
-  }    
+  }
 }
