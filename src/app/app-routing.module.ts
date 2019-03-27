@@ -3,32 +3,31 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './services/user/auth.guard';
 
 const routes: Routes = [
-  { 
-    path: '', 
-    redirectTo: 'login', 
+  /* {
+    path: '',
+    redirectTo: 'login',
     pathMatch: 'full',
+  }, */
+  {
+    path: '',
+    loadChildren: './pages/tabs/tabs.module#TabsPageModule',
   },
-  { 
-    path: 'home', 
-    loadChildren: './home/home.module#HomePageModule' ,
-    canActivate: [AuthGuard]
+  {
+    path: 'login',
+    loadChildren: './pages/login/login.module#LoginPageModule'
   },
-  { 
-    path: 'login', 
-    loadChildren: './pages/login/login.module#LoginPageModule' 
-  },
-  { 
-    path: 'profile', 
+  {
+    path: 'profile',
     loadChildren: './pages/profile/profile.module#ProfilePageModule',
     canActivate: [AuthGuard]
   },
-  { 
-    path: 'reset-password', 
-    loadChildren: './pages/reset-password/reset-password.module#ResetPasswordPageModule' 
+  {
+    path: 'reset-password',
+    loadChildren: './pages/reset-password/reset-password.module#ResetPasswordPageModule'
   },
-  { 
-    path: 'signup', 
-    loadChildren: './pages/signup/signup.module#SignupPageModule' 
+  {
+    path: 'signup',
+    loadChildren: './pages/signup/signup.module#SignupPageModule'
   },
 ];
 

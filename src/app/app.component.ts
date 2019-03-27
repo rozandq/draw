@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import * as firebase from 'firebase/app';
+import {CookieService} from 'ngx-cookie';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import * as firebase from 'firebase/app';
 })
 export class AppComponent {
   constructor(
+    private cookieService: CookieService,
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar
@@ -23,6 +25,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.cookieService.put('connected', 'false');
     });
   }
 }

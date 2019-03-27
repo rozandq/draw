@@ -9,6 +9,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {CookieService} from 'ngx-cookie';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 @Component({
   selector: 'app-signup',
@@ -26,7 +27,8 @@ export class SignupPage implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private afAuth: AngularFireAuth,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private googlePlus: GooglePlus
   ) {
     this.signupForm = this.formBuilder.group({
       email: [
@@ -57,7 +59,8 @@ export class SignupPage implements OnInit {
       this.authService.signupUser(email, password, username).then(
         () => {
           this.loading.dismiss().then(() => {
-            this.router.navigateByUrl('home');
+            this.cookieService.put('connected', 'true');
+            this.router.navigateByUrl('tabs');
           });
         },
         error => {
@@ -76,15 +79,22 @@ export class SignupPage implements OnInit {
   }
 
   async webGoogleSignup(): Promise<void> {
+      /* this.googlePlus.login({})
+          .then(res => console.log(res))
+          .catch(err => console.error(err)); */
       try {
           const provider = new firebase.auth.GoogleAuthProvider();
           const credential = await this.afAuth.auth.signInWithPopup(provider);
           console.log(credential.user);
+          firebase.auth().currentUser.updateProfile(
+          {displayName: firebase.auth().currentUser.displayName, photoURL: credential.user.photoURL}
+          );
           firebase.firestore().doc(`/userProfile/${credential.user.uid}`).set({
               username: credential.user.displayName,
-              email: credential.user.email
+              email: credential.user.email,
+              photoUrl: credential.user.photoURL
           });
-          this.router.navigateByUrl('home');
+          this.router.navigateByUrl('tabs');
           this.cookieService.put('uid', credential.user.uid);
       } catch (err) {
           console.log(err);

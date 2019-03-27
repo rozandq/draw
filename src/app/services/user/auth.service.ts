@@ -25,7 +25,8 @@ export class AuthService {
 
   signupUser(email: string, password: string, username: string): Promise<any> {
       return firebase.auth().createUserWithEmailAndPassword(email, password).then(newUserCredential => {
-          firebase.firestore().doc(`/userProfile/${newUserCredential.user.uid}`).set({ username: name,
+          firebase.auth().currentUser.updateProfile({displayName: username, photoURL: ''});
+          firebase.firestore().doc(`/userProfile/${newUserCredential.user.uid}`).set({ username: username,
               email: email,
               uid: newUserCredential.user.uid });
     }).catch(error => {

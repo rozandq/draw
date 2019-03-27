@@ -7,10 +7,8 @@ import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
-
-// import { GooglePlus } from '@ionic-native/google-plus';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Platform } from '@ionic/angular';
-  
 import { CookieService } from 'ngx-cookie';
 
 @Component({
@@ -30,8 +28,8 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private afAuth: AngularFireAuth, 
-    // private gplus: GooglePlus,
+    private afAuth: AngularFireAuth,
+    private googlePlus: GooglePlus,
     private platform: Platform,
     private cookieService: CookieService
   ) {
@@ -59,7 +57,8 @@ export class LoginPage implements OnInit {
       this.authService.loginUser(email, password).then(
         () => {
           this.loading.dismiss().then(() => {
-            this.router.navigateByUrl('home');
+            this.cookieService.put('connected', 'true');
+            this.router.navigateByUrl('tabs');
           });
         },
         error => {
@@ -78,17 +77,30 @@ export class LoginPage implements OnInit {
   }
   async webGoogleLogin(): Promise<void> {
     try {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      const credential = await this.afAuth.auth.signInWithPopup(provider);
-      console.log(credential.user);
-      firebase.firestore().doc(`/userProfile/${credential.user.uid}`).set({
-        username: credential.user.displayName,
-        email: credential.user.email
-      });
-      this.router.navigateByUrl('home');
-      this.cookieService.put('uid', credential.user.uid);
-      } catch (err) {
-          console.log(err);
+      if (this.platform.is('android') || this.platform.is('ios')) {
+          this.googlePlus.login({})
+              .then(res => console.log(res))
+              .catch(err => console.error(err));
+      } else {
+          const provider = new firebase.auth.GoogleAuthProvider();
+          const credential = await this.afAuth.auth.signInWithPopup(provider);
+          console.log(this.afAuth.auth.currentUser);
+          firebase.auth().currentUser.updateProfile(
+              {displayName: firebase.auth().currentUser.displayName, photoURL: credential.user.photoURL});
+          firebase.firestore().doc(`/userProfile/${credential.user.uid}`).set({
+              username: credential.user.displayName,
+              email: credential.user.email,
+              photoUrl: credential.user.photoURL
+          });
+          this.router.navigateByUrl('tabs');
+          this.cookieService.put('uid', credential.user.uid);
+          this.cookieService.put('connected', 'true');
       }
+      /* this.googlePlus.login({})
+          .then(res => console.log(res))
+          .catch(err => console.error(err)); */
+    } catch (err) {
+        console.log(err);
+    }
   }
 }

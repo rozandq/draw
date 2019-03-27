@@ -27,6 +27,7 @@
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.0.0",
     "@nguniversal/express-engine": "^7.1.0",
+    "cordova-browser": "6.0.0",
     "cordova-plugin-googleplus": "7.0.0",
     "core-js": "^2.5.4",
     "firebase": "^5.8.2",
@@ -65,7 +66,10 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-      "cordova-plugin-googleplus": {}
+      "cordova-plugin-googleplus": {
+        "REVERSED_CLIENT_ID": "com.m2gi.draw",
+        "WEB_APPLICATION_CLIENT_ID": "com.m2gi.draw"
+      }
     }
   }
 }

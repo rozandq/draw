@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Your friend list
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="presentPopover($event)">
+  <ion-fab-button>
+    <ion-icon name="person-add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<ion-content>
+  <ion-searchbar></ion-searchbar>
+  <ion-chip *ngIf="nbFriendReq > 0" (click)="popoverFriendRequests($event)">
+    <ion-label>Friend requests</ion-label>
+    <ion-icon name="person-add"></ion-icon>
+    <ion-badge>{{nbFriendReq}}</ion-badge>
+  </ion-chip>
+  <ion-list>
+    <ion-item-sliding *ngFor="let friend of friends">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="friend.photoUrl">
+        </ion-avatar>
+        <ion-label>{{friend.username}}</ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="delete(friend.uid)">Delete</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
