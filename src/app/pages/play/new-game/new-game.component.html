@@ -1,0 +1,8 @@
+<ion-list>
+  <ion-item class="new_game" *ngFor="let friend of friends" (click)="newGame(friend.id)">
+    <ion-avatar slot="start">
+      <img [src]="friend.data().photoUrl">
+    </ion-avatar>
+    <ion-label>{{friend.data().username}}</ion-label>
+  </ion-item>
+</ion-list>
