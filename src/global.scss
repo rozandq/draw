@@ -11,11 +11,14 @@
 @import '~@ionic/angular/css/flex-utils.css';
 
 .popover_class{
-  --height: 90%;
   --width: 90%;
-  top:50px !important;
 }
 
 .new_game:hover {
   --background: #F0EDE5 !important;
+}
+
+.cameraView {
+  --background: transparent none !important;
+  background: transparent none !important;
 }

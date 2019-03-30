@@ -35,6 +35,15 @@ const routes: Routes = [
         ]
       },
       {
+          path: 'add-friends',
+          children: [
+              {
+                  path: '',
+                  loadChildren: '../add-friends/add-friends.module#AddFriendsPageModule'
+              }
+          ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/play',
         pathMatch: 'full'

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase/app';
+import {PopoverController} from '@ionic/angular';
 
 @Component({
   selector: 'app-friend-requests',
@@ -9,7 +10,9 @@ import * as firebase from 'firebase/app';
 export class FriendRequestsComponent implements OnInit {
   friend_reqs = [];
 
-  constructor() { }
+  constructor(
+      private popoverController: PopoverController
+  ) { }
 
   ngOnInit() {
     this.friendReqsInit();
@@ -56,6 +59,10 @@ export class FriendRequestsComponent implements OnInit {
           snap => {
               if (snap.empty || snap.size > 1) {
                   console.log('No matching documents.');
+                  firebase.firestore().collection('friend_list').doc().set({
+                     uid: uid1,
+                     friends: [<string> uid2]
+                  });
                   return;
               }
               snap.forEach(
@@ -70,6 +77,7 @@ export class FriendRequestsComponent implements OnInit {
                       );
                   }
               );
+              this.popoverController.dismiss();
           }
       );
   }

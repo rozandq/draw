@@ -18,6 +18,7 @@ import { CookieService } from 'ngx-cookie';
 })
 export class LoginPage implements OnInit {
   user: Observable<firebase.User>;
+  google = 'google';
 
   public loginForm: FormGroup;
   public loading: HTMLIonLoadingElement;
@@ -29,7 +30,7 @@ export class LoginPage implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private afAuth: AngularFireAuth,
-    private googlePlus: GooglePlus,
+    private gplus: GooglePlus,
     private platform: Platform,
     private cookieService: CookieService
   ) {
@@ -77,10 +78,24 @@ export class LoginPage implements OnInit {
   }
   async webGoogleLogin(): Promise<void> {
     try {
-      if (this.platform.is('android') || this.platform.is('ios')) {
-          this.googlePlus.login({})
-              .then(res => console.log(res))
-              .catch(err => console.error(err));
+      if (this.platform.is('cordova')) {
+          /* const credential = await */
+          console.log('certif ' + await this.gplus.getSigningCertificateFingerprint());
+          const gplusUser = await this.gplus.login({
+              'webClientId': '377697817882-s9nusq9lnoe5pfkipagccekt2203tqur.apps.googleusercontent.com',
+              'offline': true,
+              'scopes': 'profile email'
+          });
+          const credential = firebase.auth.GoogleAuthProvider.credential(gplusUser.idToken);
+          this.afAuth.auth.signInWithCredential(credential);
+          firebase.firestore().doc(`/userProfile/${firebase.auth().currentUser.uid}`).set({
+              username: firebase.auth().currentUser.displayName,
+              email: firebase.auth().currentUser.email,
+              photoUrl: firebase.auth().currentUser.photoURL
+          });
+          this.router.navigateByUrl('tabs');
+          this.cookieService.put('uid', firebase.auth().currentUser.uid);
+          this.cookieService.put('connected', 'true');
       } else {
           const provider = new firebase.auth.GoogleAuthProvider();
           const credential = await this.afAuth.auth.signInWithPopup(provider);

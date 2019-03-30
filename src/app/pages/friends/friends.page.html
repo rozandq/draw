@@ -5,7 +5,7 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="presentPopover($event)">
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="router.navigateByUrl('tabs/add-friends')">
   <ion-fab-button>
     <ion-icon name="person-add"></ion-icon>
   </ion-fab-button>
@@ -18,6 +18,10 @@
     <ion-icon name="person-add"></ion-icon>
     <ion-badge>{{nbFriendReq}}</ion-badge>
   </ion-chip>
+  <ion-button (click)="qrScan()" expand="block">
+    <ion-icon name="qr-scanner"></ion-icon>
+    <ion-label>Add with QR Code </ion-label>
+  </ion-button>
   <ion-list>
     <ion-item-sliding *ngFor="let friend of friends">
       <ion-item>

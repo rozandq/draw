@@ -21,17 +21,33 @@
     "@angular/platform-browser": "^7.2.2",
     "@angular/platform-browser-dynamic": "^7.2.2",
     "@angular/router": "^7.2.2",
+    "@ionic-native/camera-preview": "^5.3.0",
     "@ionic-native/core": "^5.0.0",
-    "@ionic-native/google-plus": "^5.0.0",
+    "@ionic-native/google-plus": "^5.3.0",
+    "@ionic-native/qr-scanner": "^5.3.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
+    "@ionic-native/vibration": "^5.3.0",
     "@ionic/angular": "^4.0.0",
     "@nguniversal/express-engine": "^7.1.0",
+    "cordova-android": "8.0.0",
     "cordova-browser": "6.0.0",
-    "cordova-plugin-googleplus": "7.0.0",
+    "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-firebase-dynamiclinks": "1.1.1",
+    "cordova-plugin-googleplus": "^7.0.0",
+    "cordova-plugin-ionic-keyboard": "^2.1.3",
+    "cordova-plugin-ionic-webview": "^3.1.2",
+    "cordova-plugin-qrscanner": "3.0.0",
+    "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-statusbar": "^2.4.2",
+    "cordova-plugin-vibration": "3.1.0",
+    "cordova-plugin-whitelist": "^1.3.3",
+    "cordova-support-android-plugin": "1.0.1",
+    "cordova-support-google-services": "1.3.1",
     "core-js": "^2.5.4",
     "firebase": "^5.8.2",
     "ngx-cookie": "^4.1.2",
+    "ngx-qrcode2": "0.0.9",
     "promise-polyfill": "^8.1.0",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.29"
@@ -41,7 +57,7 @@
     "@angular-devkit/build-angular": "~0.12.3",
     "@angular-devkit/core": "~7.2.3",
     "@angular-devkit/schematics": "~7.2.3",
-    "@angular/cli": "~7.2.3",
+    "@angular/cli": "7.2.4",
     "@angular/compiler": "~7.2.2",
     "@angular/compiler-cli": "~7.2.2",
     "@angular/language-service": "~7.2.2",
@@ -67,9 +83,29 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "com.m2gi.draw",
-        "WEB_APPLICATION_CLIENT_ID": "com.m2gi.draw"
-      }
-    }
+        "WEB_APPLICATION_CLIENT_ID": "377697817882-s9nusq9lnoe5pfkipagccekt2203tqur.apps.googleusercontent.com",
+        "PLAY_SERVICES_VERSION": "11.8.0"
+      },
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-firebase-dynamiclinks": {
+        "APP_DOMAIN": "m2gi-1c630.firebaseapp.com",
+        "APP_PATH": "/tabs",
+        "PAGE_LINK_DOMAIN": "/",
+        "FIREBASE_CORE_VERSION": "16.0.+",
+        "FIREBASE_DYNAMIC_LINKS_VERSION": "16.1.+"
+      },
+      "cordova-plugin-qrscanner": {},
+      "cordova-plugin-vibration": {}
+    },
+    "platforms": [
+      "android"
+    ]
   }
 }

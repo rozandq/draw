@@ -1,14 +1,12 @@
-<p>
-  <ion-searchbar animated [(ngModel)]="searchUser" (ionInput)="filterUsers()"></ion-searchbar>
-  <ion-list>
-    <ion-item *ngFor="let user of users">
-      <ion-avatar slot="start">
-        <img [src]="user.data().photoUrl">
-      </ion-avatar>
-      <ion-label>{{user.data().username}}</ion-label>
-      <ion-chip (click)="friendRequest(user.id)">
-          <ion-icon name="person-add"></ion-icon>
-      </ion-chip>
-    </ion-item>
-  </ion-list>
-</p>
+<ion-searchbar animated [(ngModel)]="searchUser" (ionInput)="filterUsers()"></ion-searchbar>
+<ion-list>
+  <ion-item *ngFor="let user of users">
+    <ion-avatar slot="start">
+      <img [src]="user.data().photoUrl">
+    </ion-avatar>
+    <ion-label>{{user.data().username}}</ion-label>
+    <ion-chip (click)="friendRequest(user.id)">
+        <ion-icon name="person-add"></ion-icon>
+    </ion-chip>
+  </ion-item>
+</ion-list>

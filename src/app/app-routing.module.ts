@@ -29,6 +29,16 @@ const routes: Routes = [
     path: 'signup',
     loadChildren: './pages/signup/signup.module#SignupPageModule'
   },
+  { path: 'add-friends', loadChildren: './pages/add-friends/add-friends.module#AddFriendsPageModule' },
+  {
+      path: 'scan',
+      children: [
+          {
+              path: '',
+              loadChildren: './pages/scan-page/scan-page.module#ScanPagePageModule'
+          }
+      ]
+  },
 ];
 
 @NgModule({

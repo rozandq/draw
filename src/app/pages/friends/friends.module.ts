@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FriendsPage } from './friends.page';
-import { AddFriendsComponent } from './add-friends/add-friends.component';
 import { FriendRequestsComponent } from './friend-requests/friend-requests.component';
+import {QRScanner} from '@ionic-native/qr-scanner/ngx';
 
 @NgModule({
   imports: [
@@ -16,12 +16,13 @@ import { FriendRequestsComponent } from './friend-requests/friend-requests.compo
   ],
   declarations: [
     FriendsPage,
-    AddFriendsComponent,
     FriendRequestsComponent
   ],
   entryComponents: [
-      AddFriendsComponent,
       FriendRequestsComponent
+  ],
+  providers: [
+      QRScanner
   ]
 })
 export class FriendsPageModule {}

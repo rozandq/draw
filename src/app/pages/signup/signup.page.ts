@@ -79,25 +79,9 @@ export class SignupPage implements OnInit {
   }
 
   async webGoogleSignup(): Promise<void> {
-      /* this.googlePlus.login({})
-          .then(res => console.log(res))
-          .catch(err => console.error(err)); */
-      try {
-          const provider = new firebase.auth.GoogleAuthProvider();
-          const credential = await this.afAuth.auth.signInWithPopup(provider);
-          console.log(credential.user);
-          firebase.auth().currentUser.updateProfile(
-          {displayName: firebase.auth().currentUser.displayName, photoURL: credential.user.photoURL}
-          );
-          firebase.firestore().doc(`/userProfile/${credential.user.uid}`).set({
-              username: credential.user.displayName,
-              email: credential.user.email,
-              photoUrl: credential.user.photoURL
-          });
-          this.router.navigateByUrl('tabs');
-          this.cookieService.put('uid', credential.user.uid);
-      } catch (err) {
-          console.log(err);
-      }
+      await this.authService.webGoogleLogin();
+      this.router.navigateByUrl('tabs');
+      this.cookieService.put('uid', firebase.auth().currentUser.uid);
+      this.cookieService.put('connected', 'true');
   }
 }

@@ -7,6 +7,9 @@ import 'firebase/firestore';
 import { CookieService } from 'ngx-cookie';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Error} from 'tslint/lib/error';
+import {GooglePlus} from '@ionic-native/google-plus/ngx';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {Platform} from '@ionic/angular';
 
 
 @Injectable({
@@ -15,7 +18,10 @@ import {Error} from 'tslint/lib/error';
 export class AuthService {
 
   constructor(
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private gplus: GooglePlus,
+    private afAuth: AngularFireAuth,
+    private platform: Platform
   ) { }
 
   async loginUser(email: string, password: string): Promise<any> {
@@ -42,4 +48,37 @@ export class AuthService {
   logoutUser(): Promise<void> {
     return firebase.auth().signOut();
   }
+
+    async webGoogleLogin(): Promise<void> {
+        try {
+            if (this.platform.is('cordova')) {
+                /* const credential = await */
+                console.log('certif ' + await this.gplus.getSigningCertificateFingerprint());
+                const gplusUser = await this.gplus.login({
+                    'webClientId': '377697817882-s9nusq9lnoe5pfkipagccekt2203tqur.apps.googleusercontent.com',
+                    'offline': true,
+                    'scopes': 'profile email'
+                });
+                const credential = firebase.auth.GoogleAuthProvider.credential(gplusUser.idToken);
+                this.afAuth.auth.signInWithCredential(credential);
+                firebase.firestore().doc(`/userProfile/${firebase.auth().currentUser.uid}`).set({
+                    username: firebase.auth().currentUser.displayName,
+                    email: firebase.auth().currentUser.email,
+                    photoUrl: firebase.auth().currentUser.photoURL
+                });
+            } else {
+                const provider = new firebase.auth.GoogleAuthProvider();
+                const credential = await this.afAuth.auth.signInWithPopup(provider);
+                firebase.auth().currentUser.updateProfile(
+                    {displayName: firebase.auth().currentUser.displayName, photoURL: credential.user.photoURL});
+                firebase.firestore().doc(`/userProfile/${credential.user.uid}`).set({
+                    username: credential.user.displayName,
+                    email: credential.user.email,
+                    photoUrl: credential.user.photoURL
+                });
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }

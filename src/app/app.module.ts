@@ -18,6 +18,7 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { CookieModule } from 'ngx-cookie';
 
 import { firebaseConfig } from './credentials';
+import {NgxQRCodeModule} from 'ngx-qrcode2';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +31,8 @@ import { firebaseConfig } from './credentials';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
+    NgxQRCodeModule
   ],
   providers: [
     StatusBar,

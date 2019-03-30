@@ -5,10 +5,10 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {GooglePlus} from '@ionic-native/google-plus/ngx';
 import * as firebase from 'firebase/app';
 import { ToastController } from '@ionic/angular';
-import {forEach} from '@angular-devkit/schematics';
 import { PopoverController } from '@ionic/angular';
 import { AddFriendsComponent } from './add-friends/add-friends.component';
 import { FriendRequestsComponent } from './friend-requests/friend-requests.component';
+import {QRScanner, QRScannerStatus} from '@ionic-native/qr-scanner/ngx';
 
 @Component({
   selector: 'app-friends',
@@ -25,7 +25,8 @@ export class FriendsPage {
         private googlePlus: GooglePlus,
         private cookieService: CookieService,
         public toastController: ToastController,
-        public popoverController: PopoverController
+        public popoverController: PopoverController,
+        private qrScanner: QRScanner
     ) {
         this.loadFriends();
         this.initNbFriendReq();
@@ -125,6 +126,7 @@ export class FriendsPage {
             snapshot => {
                 if (snapshot.empty) {
                     console.log('No matching documents.');
+                    this.nbFriendReq = 0;
                     return;
                 }
                 this.nbFriendReq = snapshot.size;
@@ -145,5 +147,8 @@ export class FriendsPage {
             cssClass: 'popover_class'
         });
         return await popover.present();
+    }
+    qrScan() {
+        this.router.navigateByUrl('scan');
     }
 }

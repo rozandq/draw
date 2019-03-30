@@ -10,6 +10,7 @@ import {ToastController} from '@ionic/angular';
 export class AddFriendsComponent implements OnInit {
   searchUser = '';
   users = [];
+  usersToDisplay = [];
   uid = '';
   constructor(
       private toastController: ToastController
@@ -18,6 +19,7 @@ export class AddFriendsComponent implements OnInit {
   }
 
   ngOnInit() {
+      this.filterUsers();
   }
   filterUsers() {
     const new_users = []
@@ -53,5 +55,9 @@ export class AddFriendsComponent implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  loadData(ev) {
+      console.log('scroll');
   }
 }

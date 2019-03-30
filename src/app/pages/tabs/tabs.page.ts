@@ -25,6 +25,7 @@ export class TabsPage {
     snapshot => {
     if (snapshot.empty) {
         console.log('No matching documents.');
+        this.nbFriendReq = 0;
         return;
     }
     this.nbFriendReq = snapshot.size;

@@ -16,6 +16,8 @@ export class UserProfilePage {
   email = '';
   creationDate = '';
   imgUrl = '';
+  elementType: 'url' | 'canvas' | 'img' = 'url';
+  value = 'default';
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
@@ -25,6 +27,7 @@ export class UserProfilePage {
     this.uid = cookieService.get('uid');
     this.creationDate = afAuth.auth.currentUser.metadata.creationTime;
     this.name = afAuth.auth.currentUser.displayName;
+    this.value = afAuth.auth.currentUser.uid;
     this.email = afAuth.auth.currentUser.email;
     this.imgUrl = afAuth.auth.currentUser.photoURL;
   }
