@@ -47,14 +47,16 @@ export class NewGameComponent implements OnInit {
       );
   }
   newGame(uid) {
-      firebase.firestore().collection('game_uids').doc().set({
-          uids: [ <string> firebase.auth().currentUser.uid, <string> uid]
+      firebase.firestore().collection('game').doc().set({
+          uids: [ <string> firebase.auth().currentUser.uid, <string> uid],
+          step: 'pick-word',
+          turn: firebase.auth().currentUser.uid
       }).then(
           () => this.onDismiss()
       );
   }
   async game_already_exists(uid1, uid2) {
-      return firebase.firestore().collection('game_uids').get().then(
+      return firebase.firestore().collection('game').get().then(
           snapshot => {
               if (snapshot.empty) {
                   console.log('No matching documents.');

@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>guess</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-label>{{word}}</ion-label>
+  <ion-input [(ngModel)]="answer"></ion-input>
+  <ion-button (click)="checkWord()"> Confirm </ion-button>
+</ion-content>

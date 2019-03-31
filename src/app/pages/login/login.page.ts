@@ -76,10 +76,14 @@ export class LoginPage implements OnInit {
       await this.loading.present();
     }
   }
-  async webGoogleLogin(): Promise<void> {
+    async webGoogleLogin(): Promise<void> {
+      await this.authService.webGoogleLogin();
+      this.router.navigateByUrl('tabs');
+      this.cookieService.put('uid', firebase.auth().currentUser.uid);
+      this.cookieService.put('connected', 'true');
+      /*
     try {
       if (this.platform.is('cordova')) {
-          /* const credential = await */
           console.log('certif ' + await this.gplus.getSigningCertificateFingerprint());
           const gplusUser = await this.gplus.login({
               'webClientId': '377697817882-s9nusq9lnoe5pfkipagccekt2203tqur.apps.googleusercontent.com',
@@ -111,11 +115,9 @@ export class LoginPage implements OnInit {
           this.cookieService.put('uid', credential.user.uid);
           this.cookieService.put('connected', 'true');
       }
-      /* this.googlePlus.login({})
-          .then(res => console.log(res))
-          .catch(err => console.error(err)); */
     } catch (err) {
         console.log(err);
     }
+    */
   }
 }

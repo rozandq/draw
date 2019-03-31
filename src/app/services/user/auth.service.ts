@@ -61,21 +61,39 @@ export class AuthService {
                 });
                 const credential = firebase.auth.GoogleAuthProvider.credential(gplusUser.idToken);
                 this.afAuth.auth.signInWithCredential(credential);
-                firebase.firestore().doc(`/userProfile/${firebase.auth().currentUser.uid}`).set({
-                    username: firebase.auth().currentUser.displayName,
-                    email: firebase.auth().currentUser.email,
-                    photoUrl: firebase.auth().currentUser.photoURL
-                });
+                firebase.firestore().doc(`/userProfile/${firebase.auth().currentUser.uid}`).get().then(
+                    doc => {
+                        console.log(doc.data());
+                        if (!doc.exists) {
+                            firebase.firestore().doc(`/userProfile/${firebase.auth().currentUser.uid}`).set({
+                                username: firebase.auth().currentUser.displayName,
+                                email: firebase.auth().currentUser.email,
+                                photoUrl: firebase.auth().currentUser.photoURL,
+                                score: 0
+                            });
+                            return;
+                        }
+                    }
+                );
             } else {
                 const provider = new firebase.auth.GoogleAuthProvider();
                 const credential = await this.afAuth.auth.signInWithPopup(provider);
                 firebase.auth().currentUser.updateProfile(
                     {displayName: firebase.auth().currentUser.displayName, photoURL: credential.user.photoURL});
-                firebase.firestore().doc(`/userProfile/${credential.user.uid}`).set({
-                    username: credential.user.displayName,
-                    email: credential.user.email,
-                    photoUrl: credential.user.photoURL
-                });
+                firebase.firestore().doc(`/userProfile/${firebase.auth().currentUser.uid}`).get().then(
+                    doc => {
+                        console.log(doc.data());
+                        if (!doc.exists) {
+                            firebase.firestore().doc(`/userProfile/${firebase.auth().currentUser.uid}`).set({
+                                username: firebase.auth().currentUser.displayName,
+                                email: firebase.auth().currentUser.email,
+                                photoUrl: firebase.auth().currentUser.photoURL,
+                                score: 0
+                            });
+                            return;
+                        }
+                    }
+                );
             }
         } catch (err) {
             console.log(err);

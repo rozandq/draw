@@ -39,6 +39,9 @@ const routes: Routes = [
           }
       ]
   },
+  { path: 'pick-word', loadChildren: './pages/pick-word/pick-word.module#PickWordPageModule' },
+  { path: 'draw', loadChildren: './pages/draw/draw.module#DrawPageModule' },
+  { path: 'guess', loadChildren: './pages/guess/guess.module#GuessPageModule' },
 ];
 
 @NgModule({
