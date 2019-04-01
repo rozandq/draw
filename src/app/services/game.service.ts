@@ -81,6 +81,13 @@ export class GameService {
       console.log('WIN!!!!!!!!!!!!');
       firebase.firestore().collection('game').doc(game_id).get().then(
           doc => {
+              for (const u of doc.data().uids) {
+                  firebase.firestore().collection('userProfile').doc(u).get().then(
+                      user => {
+                          firebase.firestore().collection('userProfile').doc(u).update('score', user.data().score + 5);
+                      }
+                  );
+              }
               firebase.firestore().collection('past_game').doc(game_id).set({
                   uids: doc.data().uids,
                   word: doc.data().word

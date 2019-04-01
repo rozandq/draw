@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { GuessPage } from './guess.page';
+import {Vibration} from '@ionic-native/vibration/ngx';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [GuessPage]
+  declarations: [GuessPage],
+  providers: [ Vibration ]
 })
 export class GuessPageModule {}

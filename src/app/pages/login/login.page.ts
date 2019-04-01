@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Platform } from '@ionic/angular';
 import { CookieService } from 'ngx-cookie';
+import {Vibration} from '@ionic-native/vibration/ngx';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,8 @@ export class LoginPage implements OnInit {
     private afAuth: AngularFireAuth,
     private gplus: GooglePlus,
     private platform: Platform,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private vibration: Vibration
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['',
@@ -79,6 +81,7 @@ export class LoginPage implements OnInit {
     async webGoogleLogin(): Promise<void> {
       await this.authService.webGoogleLogin();
       this.router.navigateByUrl('tabs');
+      // this.vibration.vibrate(1000)
       this.cookieService.put('uid', firebase.auth().currentUser.uid);
       this.cookieService.put('connected', 'true');
       /*

@@ -6,6 +6,21 @@
 
 <ion-content padding>
   <ion-label>{{word}}</ion-label>
-  <ion-input [(ngModel)]="answer"></ion-input>
-  <ion-button (click)="checkWord()"> Confirm </ion-button>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let l of answer">
+        <ion-button (click)="pop(l)" [color]="color">{{ l.l }}</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngFor="let l of letters1">
+        <ion-button (click)="push(l)">{{ l.l }}</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngFor="let l of letters2">
+        <ion-button (click)="push(l)">{{ l.l }}</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -109,6 +109,7 @@ export class PlayPage {
                 );
                 this.pasts = new_past;
                 console.log(this.pasts);
+                this.initCurrGames();
             }
         );
     }
