@@ -29,7 +29,11 @@ const routes: Routes = [
     path: 'signup',
     loadChildren: './pages/signup/signup.module#SignupPageModule'
   },
-  { path: 'add-friends', loadChildren: './pages/add-friends/add-friends.module#AddFriendsPageModule' },
+  {
+    path: 'add-friends',
+    loadChildren: './pages/add-friends/add-friends.module#AddFriendsPageModule',
+    canActivate: [AuthGuard]
+  },
   {
       path: 'scan',
       children: [
@@ -37,11 +41,12 @@ const routes: Routes = [
               path: '',
               loadChildren: './pages/scan-page/scan-page.module#ScanPagePageModule'
           }
-      ]
+      ],
+      canActivate: [AuthGuard]
   },
-  { path: 'pick-word', loadChildren: './pages/pick-word/pick-word.module#PickWordPageModule' },
-  { path: 'draw', loadChildren: './pages/draw/draw.module#DrawPageModule' },
-  { path: 'guess', loadChildren: './pages/guess/guess.module#GuessPageModule' },
+  { path: 'pick-word', loadChildren: './pages/pick-word/pick-word.module#PickWordPageModule', canActivate: [AuthGuard] },
+  { path: 'draw', loadChildren: './pages/draw/draw.module#DrawPageModule', canActivate: [AuthGuard] },
+  { path: 'guess', loadChildren: './pages/guess/guess.module#GuessPageModule', canActivate: [AuthGuard] },
 ];
 
 @NgModule({

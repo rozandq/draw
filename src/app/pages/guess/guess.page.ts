@@ -17,13 +17,14 @@ export class GuessPage implements OnInit {
   word: string;
   game_id = '';
   // answer = '';
-  letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-      'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+  letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+      'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
   letters_to_display = [];
+  display = [true, true, true, true, true, true, true, true, true, true, true, true];
   letters1 = [];
   letters2 = [];
   answer = [];
-  color_answer = 'warning';
+  color_answer = '#F8FB3E';
 
   @ViewChild('canvasComponent') canvasComponent: CanvasComponent;
   constructor(
@@ -36,7 +37,7 @@ export class GuessPage implements OnInit {
     console.log(this.game_id);
     firebase.firestore().collection('game').doc(this.game_id).get().then(
       doc => {
-        this.word = doc.data().word;
+        this.word = doc.data().word.toUpperCase();
         for (const l of this.word) {
             this.letters_to_display.push(l);
             this.answer.push({
@@ -47,7 +48,7 @@ export class GuessPage implements OnInit {
             this.letters_to_display.push(this.letters[Math.floor((Math.random() * 26))]);
         }
         this.letters_to_display = this.shuffle(this.letters_to_display);
-        console.log('letters ' + this.letters_to_display);
+        /* console.log('letters ' + this.letters_to_display);
         for (let i = 0; i < 6; i++) {
             this.letters1.push({
                 l: this.letters_to_display.shift(),
@@ -67,7 +68,7 @@ export class GuessPage implements OnInit {
                   i_a: -1
               });
         }
-        console.log('l2 ' + this.letters2);
+        console.log('l2 ' + this.letters2); */
       }
     );
   }
@@ -84,9 +85,9 @@ export class GuessPage implements OnInit {
     for (const l of this.answer) {
         res += l.l;
     }
-    console.log('*' + this.word + '* *' + res + '*');
-    if (this.word === res) {
-      this.color = 'success';
+    console.log('*' + this.word.toUpperCase() + '* *' + res + '*');
+    if (this.word.toUpperCase() === res) {
+      this.color_answer = '#65F721';
       this.presentWinCode().then(
           () => this.vibration.vibrate(500)
       );
@@ -119,8 +120,16 @@ export class GuessPage implements OnInit {
     }
     return array;
   }
-  push(l) {
+  push(l, i) {
+      const i_fp = this.firstPlace();
+      console.log('push ' + l + ' at ' + i_fp);
       if (this.firstPlace() !== -1) {
+          this.answer[i_fp] = ({l: l, i: i, i_a: i_fp});
+          this.display[i] = false;
+          this.checkWord();
+      }
+      console.log(this.answer);
+      /* if (this.firstPlace() !== -1) {
           l.i_a = this.firstPlace();
           console.log('push ' + l.i_a);
           this.answer[l.i_a] = l;
@@ -131,10 +140,12 @@ export class GuessPage implements OnInit {
               this.letters2.splice(l.i, 1);
           }
           this.checkWord();
-      }
+      }*/
   }
   pop(l) {
-      console.log('pop');
+      this.answer[l.i_a] = {l: '  '};
+      this.display[l.i] = true;
+      /* console.log('pop');
       if (l.l !== '  ') {
           console.log(l);
           if (l.list === 1) {
@@ -150,7 +161,7 @@ export class GuessPage implements OnInit {
                   l: '  '
               };
           }
-      }
+      }*/
   }
   firstPlace(): number {
       let res = -1;

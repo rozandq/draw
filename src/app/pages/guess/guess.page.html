@@ -12,7 +12,16 @@
 </ion-content>
 <ion-footer>
   <ion-label>{{word}}</ion-label>
-  <ion-grid>
+  <ion-buttons>
+    <button ion-button  *ngFor="let l of answer" (click)="pop(l)" [style.background-color]="color_answer">{{ l.l }}</button>
+  </ion-buttons>
+  <!--ion-buttons>
+    <button ion-button  *ngFor="let l of letters1" (click)="push(l)">{{ l.l }}</button>
+  </ion-buttons>
+  <ion-buttons>
+    <button ion-button  *ngFor="let l of letters2" (click)="push(l)">{{ l.l }}</button>
+  </ion-buttons-->
+  <!--ion-grid>
     <ion-row>
       <ion-col *ngFor="let l of answer">
         <ion-button (click)="pop(l)" [color]="color_answer">{{ l.l }}</ion-button>
@@ -28,5 +37,21 @@
         <ion-button (click)="push(l)">{{ l.l }}</ion-button>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid-->
+  <ion-buttons>
+    <button [style.visibility]="display[0] ? 'visible' : 'hidden'" ion-button  (click)="push(letters_to_display[0], 0)">{{ letters_to_display[0] }}</button>
+    <button [style.visibility]="display[1] ? 'visible' : 'hidden'" ion-button  (click)="push(letters_to_display[1], 1)">{{ letters_to_display[1] }}</button>
+    <button [style.visibility]="display[2] ? 'visible' : 'hidden'" ion-button  (click)="push(letters_to_display[2], 2)">{{ letters_to_display[2] }}</button>
+    <button [style.visibility]="display[3] ? 'visible' : 'hidden'" ion-button  (click)="push(letters_to_display[3], 3)">{{ letters_to_display[3] }}</button>
+    <button [style.visibility]="display[4] ? 'visible' : 'hidden'" ion-button  (click)="push(letters_to_display[4], 4)">{{ letters_to_display[4] }}</button>
+    <button [style.visibility]="display[5] ? 'visible' : 'hidden'" ion-button  (click)="push(letters_to_display[5], 5)">{{ letters_to_display[5] }}</button>
+  </ion-buttons>
+  <ion-buttons>
+    <button [style.visibility]="display[6] ? 'visible' : 'hidden'" ion-button  (click)="push(letters_to_display[6], 6)">{{ letters_to_display[6] }}</button>
+    <button [style.visibility]="display[7] ? 'visible' : 'hidden'" ion-button  (click)="push(letters_to_display[7], 7)">{{ letters_to_display[7] }}</button>
+    <button [style.visibility]="display[8] ? 'visible' : 'hidden'" ion-button  (click)="push(letters_to_display[8], 8)">{{ letters_to_display[8] }}</button>
+    <button [style.visibility]="display[9] ? 'visible' : 'hidden'" ion-button  (click)="push(letters_to_display[9], 9)">{{ letters_to_display[9] }}</button>
+    <button [style.visibility]="display[10] ? 'visible' : 'hidden'" ion-button  (click)="push(letters_to_display[10], 10)">{{ letters_to_display[10] }}</button>
+    <button [style.visibility]="display[11] ? 'visible' : 'hidden'" ion-button  (click)="push(letters_to_display[11], 11)">{{ letters_to_display[11] }}</button>
+  </ion-buttons>
 </ion-footer>

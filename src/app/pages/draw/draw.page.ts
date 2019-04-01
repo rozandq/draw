@@ -14,29 +14,29 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./draw.page.scss'],
 })
 export class DrawPage implements OnInit, AfterViewInit {
-  @Input() word : string;
-  @ViewChild("canvasComponent") canvasComponent : CanvasComponent;
+  @Input() word: string;
+  @ViewChild('canvasComponent') canvasComponent: CanvasComponent;
 
   game_id = '';
-  selectedColor : number;
-  selectedWidth : number;
-  color : string;
-  lineWidth : number;
-  size : string;
-  sizes : string[] = ["small", "medium", "large", "extra-large"];
+  selectedColor: number;
+  selectedWidth: number;
+  color: string;
+  lineWidth: number;
+  size: string;
+  sizes: string[] = ['small', 'medium', 'large', 'extra-large'];
 
   constructor(
     private popoverController: PopoverController,
     public gameService: GameService,
     private cookieService: CookieService
     ) {
-    console.log("Start Draw");
+    console.log('Start Draw');
 
     this.selectedColor = 0;
     this.selectedWidth = 1;
     this.color = '#2ecc71';
     this.lineWidth = 10;
-    this.size = "medium";
+    this.size = 'medium';
 
     this.game_id = this.cookieService.get('current_game_id');
   }
@@ -79,7 +79,7 @@ export class DrawPage implements OnInit, AfterViewInit {
     });
 
     popover.onDidDismiss().then((res) => {
-      if(res.data){
+      if (res.data) {
         this.lineWidth = res.data.width;
         this.selectedWidth = res.data.selectedWidth;
         this.size = this.sizes[this.selectedWidth];
@@ -89,7 +89,7 @@ export class DrawPage implements OnInit, AfterViewInit {
   }
 
 
-  changeLineWidth(width : number, indice : number) {
+  changeLineWidth(width: number, indice: number) {
     this.lineWidth = width;
     this.selectedWidth = indice;
   }
