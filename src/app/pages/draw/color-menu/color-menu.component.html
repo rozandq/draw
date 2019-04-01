@@ -1,0 +1,17 @@
+<ion-grid>
+  <ion-row>
+    <ion-col><button [class.selected]="selectedColor === 0" id="color0" (click)="returnColor('#2ecc71', 0)"></button></ion-col>
+    <ion-col><button [class.selected]="selectedColor === 1" id="color1" (click)="returnColor('#3498db', 1)"></button></ion-col>
+    <ion-col><button [class.selected]="selectedColor === 2" id="color2" (click)="returnColor('#9b59b6', 2)"></button></ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col><button [class.selected]="selectedColor === 3" id="color3" (click)="returnColor('#e74c3c', 3)"></button></ion-col>
+    <ion-col><button [class.selected]="selectedColor === 4" id="color4" (click)="returnColor('#e67e22', 4)"></button></ion-col>
+    <ion-col><button [class.selected]="selectedColor === 5" id="color5" (click)="returnColor('#f1c40f', 5)"></button></ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col><button [class.selected]="selectedColor === 6" id="color6" (click)="returnColor('#ffffff', 6)"></button></ion-col>
+    <ion-col><button [class.selected]="selectedColor === 7" id="color7" (click)="returnColor('#825a2c', 7)"></button></ion-col>
+    <ion-col><button [class.selected]="selectedColor === 8" id="color8" (click)="returnColor('#000000', 8)"></button></ion-col>
+  </ion-row>
+</ion-grid>

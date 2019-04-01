@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-
-import * as firebase from 'firebase/app';
-import {CookieService} from 'ngx-cookie';
-import {GameService} from '../../services/game.service';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { GameService } from '../../services/game.service';
+import { CanvasComponent } from 'src/app/components/canvas/canvas.component';
 import {AlertController} from '@ionic/angular';
+import {CookieService} from 'ngx-cookie';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-guess',
@@ -11,9 +11,15 @@ import {AlertController} from '@ionic/angular';
   styleUrls: ['./guess.page.scss'],
 })
 export class GuessPage implements OnInit {
-  word = '';
+
+  color : string;
+  lineWidth : number;
+  word : string;
   game_id = '';
-  answer = '';
+  @ViewChild("answer") answer : any;
+
+  @ViewChild("canvasComponent") canvasComponent : CanvasComponent;
+
   constructor(
     private cookieService: CookieService,
     public gameService: GameService,
@@ -29,10 +35,15 @@ export class GuessPage implements OnInit {
   }
 
   ngOnInit() {
+    firebase.firestore().collection('game').doc(this.game_id).get().then(res => {
+      this.canvasComponent.setAndDrawAllWithTimeout(res.data().drawEvents);
+      this.word = res.data().word;
+    })
   }
+
   checkWord() {
-    console.log('*' + this.word + '* *' + this.answer + '*');
-    if (this.word === this.answer) {
+    console.log('*' + this.word + '* *' + this.answer.value + '*');
+    if (this.word === this.answer.value) {
       this.gameService.endGame(this.game_id);
     }
   }
@@ -52,4 +63,5 @@ export class GuessPage implements OnInit {
 
       await alert.present();
   }
+
 }

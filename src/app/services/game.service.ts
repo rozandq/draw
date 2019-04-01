@@ -4,6 +4,7 @@ import * as firebase from 'firebase/app';
 import {PopoverController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie';
+import { DocumentData } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -94,4 +95,5 @@ export class GameService {
           }
       );
   }
+
 }

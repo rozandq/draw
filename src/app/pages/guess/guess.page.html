@@ -1,11 +1,31 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>guess</ion-title>
+    <ion-title>Guess</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-label>{{word}}</ion-label>
-  <ion-input [(ngModel)]="answer"></ion-input>
-  <ion-button (click)="checkWord()"> Confirm </ion-button>
-</ion-content>
+<div style="width:100%">
+  <div id="canvas-parent">
+    <app-canvas #canvasComponent [drawable]='false'></app-canvas>
+  </div>
+</div>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons>
+      <button [style.background-color]="color" (click)="showColors($event)"></button>
+      <button (click)="showSizes($event)"><span id={{size}}></span></button>
+      <button ion-button icon-only (click)="undo()"><ion-icon name="undo"></ion-icon></button>
+      <button ion-button icon-only (click)="redo()"><ion-icon name="redo"></ion-icon></button>
+      <button ion-button icon-only style="background-color: tomato" (click)="clear()"><ion-icon name="trash"></ion-icon></button>
+      <button ion-button icon-only style="background-color: royalblue" (click)="gameService.validDraw(game_id, this.canvasComponent.drawEvents)"><ion-icon name="send"></ion-icon></button>
+    </ion-buttons>
+  </ion-toolbar>
+  </ion-footer>
+  
+<ion-footer>
+  <ion-toolbar>
+    <ion-input #answer></ion-input>
+    <button ion-button icon-only style="background-color: seagreen" (click)="checkWord()"><ion-icon name="checkmark"></ion-icon></button>
+  </ion-toolbar>
+</ion-footer>

@@ -19,6 +19,7 @@ import { CookieModule } from 'ngx-cookie';
 
 import { firebaseConfig } from './credentials';
 import {NgxQRCodeModule} from 'ngx-qrcode2';
+import { CanvasComponent } from './components/canvas/canvas.component';
 
 @NgModule({
   declarations: [AppComponent],

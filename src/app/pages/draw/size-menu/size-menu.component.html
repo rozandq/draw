@@ -1,0 +1,8 @@
+<ion-grid>
+  <ion-row><ion-col><button [class.selected]="selectedWidth === 3" (click)="returnSize(40,3)"><span id="extra-large"></span></button></ion-col></ion-row>
+  <ion-row><ion-col><button [class.selected]="selectedWidth === 2" (click)="returnSize(20,2)"><span id="large"></span></button></ion-col></ion-row>
+  <ion-row><ion-col><button [class.selected]="selectedWidth === 1" (click)="returnSize(10,1)"><span id="medium"></span></button></ion-col></ion-row>
+  <ion-row><ion-col><button [class.selected]="selectedWidth === 0" (click)="returnSize(5,0)"><span id="small"></span></button></ion-col></ion-row>
+</ion-grid>
+
+
