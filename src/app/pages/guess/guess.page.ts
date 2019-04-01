@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-
-import * as firebase from 'firebase/app';
-import {CookieService} from 'ngx-cookie';
-import {GameService} from '../../services/game.service';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { GameService } from '../../services/game.service';
+import { CanvasComponent } from 'src/app/components/canvas/canvas.component';
 import {AlertController} from '@ionic/angular';
 import {Vibration} from '@ionic-native/vibration/ngx';
+import {CookieService} from 'ngx-cookie';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-guess',
@@ -12,7 +12,9 @@ import {Vibration} from '@ionic-native/vibration/ngx';
   styleUrls: ['./guess.page.scss'],
 })
 export class GuessPage implements OnInit {
-  word = '';
+  color: string;
+  lineWidth: number;
+  word: string;
   game_id = '';
   // answer = '';
   letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
@@ -21,7 +23,9 @@ export class GuessPage implements OnInit {
   letters1 = [];
   letters2 = [];
   answer = [];
-  color = 'warning';
+  color_answer = 'warning';
+
+  @ViewChild('canvasComponent') canvasComponent: CanvasComponent;
   constructor(
     private cookieService: CookieService,
     public gameService: GameService,
@@ -69,7 +73,12 @@ export class GuessPage implements OnInit {
   }
 
   ngOnInit() {
+    firebase.firestore().collection('game').doc(this.game_id).get().then(res => {
+      this.canvasComponent.setAndDrawAllWithTimeout(res.data().drawEvents);
+      this.word = res.data().word;
+    });
   }
+
   checkWord() {
     let res = '';
     for (const l of this.answer) {

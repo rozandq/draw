@@ -1,0 +1,61 @@
+#word {
+    text-align: center;
+    font-size: 150%;
+    margin-top: 15px;
+    height: 75px;
+}
+
+
+#canvas-parent {
+  display: flex;
+  justify-content: center;
+
+}
+
+// button {
+//     border-style: solid;
+//     border-width: 2px;
+//     width: 50px;
+//     height: 50px;
+//     margin-right: 2px;
+//     text-align: center;
+//     padding-left: 0;
+//     padding-right: 0;
+//     align-items: center;
+//     display: flex;
+//     justify-content: center;
+//     border-radius: 25%;
+// }
+
+
+#small {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: black;
+}
+
+#medium {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: black;
+}
+
+#large {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: black;
+}
+
+#extra-large {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: black;
+}

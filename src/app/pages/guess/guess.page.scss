@@ -1,0 +1,20 @@
+#canvas-parent {
+    display: flex;
+    justify-content: center;
+  
+  }
+
+  button {
+    border-style: solid;
+    border-width: 2px;
+    width: 50px;
+    height: 50px;
+    margin-left: 2px;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 25%;
+}

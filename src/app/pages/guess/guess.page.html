@@ -1,15 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>guess</ion-title>
+    <ion-title>Guess</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content padding>
+<ion-content>
+  <div style="width:100%">
+    <div id="canvas-parent">
+      <app-canvas #canvasComponent [drawable]='false'></app-canvas>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
   <ion-label>{{word}}</ion-label>
   <ion-grid>
     <ion-row>
       <ion-col *ngFor="let l of answer">
-        <ion-button (click)="pop(l)" [color]="color">{{ l.l }}</ion-button>
+        <ion-button (click)="pop(l)" [color]="color_answer">{{ l.l }}</ion-button>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -23,4 +29,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-</ion-content>
+</ion-footer>
