@@ -8,47 +8,49 @@ Une fois le mot choisi, le joueur doit dessiner quelque chose qui permettra à s
 Une fois le dessin envoyé, l'autre joueur doit simplement deviner le mot. 
 Une fois deviné, les 2 joueurs récoltent 5 étoiles supplémentaires (score sur l'application).
 
+## Fonctionnalités
+
+**Connexion email/mot de passe**
+
+Il est possible de créer un compte et de se connecter avec un email/mot de passe.
+
+
+**Connexion SSO avec Google**
+
+Il est possible de créer un compte et de se connecter en utilisant son compte google. Sur un smartphone, l'application native google est ouverte pour choisir son compte.
+
+
+**Liste d'amis**
+
+L'application met à disposition une liste d'amis avec la possibilité d'ajouter des amis en recherchant leur nom parmis la liste des utilisateurs. Il est possible de supprimer un amis de sa liste.
+
+
+**QR Code**
+
+Un QR Code est généré à la création de chaque compte et il est possible d'ajouter un amis en scannant son QR Code.
+
+
+**Historique des parties**
+
+Un historiques des anciennes parties déjà jouées est gardé avec pour chaque partie, le mot qu'il fallait deviner.
+
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisites
-
-What things you need to install the software and how to install them
-
+Pour lancer ce projet sur on ordinateur, vous avez juste à cloner ce git et lancer la commande :
 ```
-Give examples
+ionic serve
 ```
 
-### Installing
+## Déploiement
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Deployment
-
-To deploy the app on 
+Pour déployer cette application sur un mobile, branchez un smartphone android sur votre ordinateur, activez le mode développeur et lancez la commande :
 ```
 ionic cordova run android
 ```
 
-## Built With
+## Built avec 
 
 * [Ionic](https://ionicframework.com/) - Cross-Platform Mobile App Development
-* [Gradle](https://gradle.org) - Build Tool
 * [Firebase](https://firebase.google.com) - Data hosting
 
 ## Authors
