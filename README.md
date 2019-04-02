@@ -10,27 +10,27 @@ Une fois deviné, les 2 joueurs récoltent 5 étoiles supplémentaires (score su
 
 ## Fonctionnalités
 
-**Connexion email/mot de passe**
+### Connexion email/mot de passe
 
 Il est possible de créer un compte et de se connecter avec un email/mot de passe.
 
 
-**Connexion SSO avec Google**
+### Connexion SSO avec Google
 
 Il est possible de créer un compte et de se connecter en utilisant son compte google. Sur un smartphone, l'application native google est ouverte pour choisir son compte.
 
 
-**Liste d'amis**
+### Liste d'amis
 
 L'application met à disposition une liste d'amis avec la possibilité d'ajouter des amis en recherchant leur nom parmis la liste des utilisateurs. Il est possible de supprimer un amis de sa liste.
 
 
-**QR Code**
+### QR Code
 
 Un QR Code est généré à la création de chaque compte et il est possible d'ajouter un amis en scannant son QR Code.
 
 
-**Historique des parties**
+### Historique des parties
 
 Un historiques des anciennes parties déjà jouées est gardé avec pour chaque partie, le mot qu'il fallait deviner.
 
