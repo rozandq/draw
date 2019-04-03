@@ -8,7 +8,7 @@ Une fois le mot choisi, le joueur doit dessiner quelque chose qui permettra à s
 Une fois le dessin envoyé, l'autre joueur doit simplement deviner le mot. 
 Une fois deviné, les 2 joueurs récoltent 5 étoiles supplémentaires (score sur l'application).
 
-Notre application fonctionne totalement côté client puisque le jeu n'est pas en temps réel mais que les joueurs jouent chacun leur tour.
+Notre application fonctionne totalement côté client (avec accès au firestore de Firebase) puisque le jeu n'est pas en temps réel mais que les joueurs jouent chacun leur tour.
 Il n'y a donc pas d'architecture particulière mise en place. 
 
 
