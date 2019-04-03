@@ -29,6 +29,10 @@ L'application met à disposition une liste d'amis avec la possibilité d'ajouter
 
 Un QR Code est généré à la création de chaque compte et il est possible d'ajouter un amis en scannant son QR Code.
 
+### Vibration
+
+Une vibration est lancée lors de la victoire d'une partie.
+
 
 ### Historique des parties
 
