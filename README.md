@@ -8,7 +8,7 @@ Une fois le mot choisi, le joueur doit dessiner quelque chose qui permettra à s
 Une fois le dessin envoyé, l'autre joueur doit simplement deviner le mot. 
 Une fois deviné, les 2 joueurs récoltent 5 étoiles supplémentaires (score sur l'application).
 
-## Fonctionnalités
+## Fonctionnalités mises en place
 
 ### Connexion email/mot de passe
 
@@ -33,6 +33,32 @@ Un QR Code est généré à la création de chaque compte et il est possible d'a
 ### Historique des parties
 
 Un historiques des anciennes parties déjà jouées est gardé avec pour chaque partie, le mot qu'il fallait deviner.
+
+
+## Fonctionnalités abandonnées
+
+### Monétisation / Pub
+
+Après l'ajout du plugin Ionic native AdMobPro et sa mise en place pour ouvrir une pub lorsqu'un joueur lance une partie, nous avions des soucis de dépendances pour le build android et nous n'avons pas réussi à trouver de solutions assez rapidement pour garder cette fonctionnalité.
+
+
+### Notifications
+
+Nous voulions ajouter l'envoi de notification lorsqu'un utilisateur fait une demande d'amis ou lance une partie, mais après avoir regardé la démarche à suivre, nous navions plus assez de temps pour être certain de finaliser cette fonctionnalité avant le rendu.
+
+
+## Règles de sécurité Firebase
+
+```
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=\} {
+      allow read, write: if request.auth.uid != null;
+    }
+  }
+}
+```
+
 
 ## Getting Started
 
