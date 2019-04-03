@@ -39,6 +39,14 @@ Une vibration est lancée lors de la victoire d'une partie.
 Un historiques des anciennes parties déjà jouées est gardé avec pour chaque partie, le mot qu'il fallait deviner.
 
 
+### Tirage aléatoire d'un mot
+
+Nous avons choisi de rentrer une liste de mot nous même dans un document Firebase. 3 indexs sont tirés aléatoirement coté client et une requête est lancée.
+Cette méthode nécessite néanmoins d'avoir une base conséquente et d'ajouter à la main (ou par un script) tout les mots dans la base de donnée. Nous n'en n'avons ajouté que 8 pour pouvoir réaliser ce test. 
+
+D'autant plus que pour un tel jeu, chaque mot doit avoir au préalable été séléctionné et validé pour être certain qu'il soit judicieux de le proposé aux joueurs. 
+
+
 ## Fonctionnalités abandonnées
 
 ### Monétisation / Pub
