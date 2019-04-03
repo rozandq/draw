@@ -85,7 +85,7 @@ Pour déployer cette application sur un mobile, branchez un smartphone android s
 ```
 ionic cordova run android
 ```
-Ou déployez l'apk situé dans le chemin ..\draw\platforms\android\app\build\outputs\apk\debug\app-debug.apk
+Ou déployez l'apk situé dans le chemin \draw\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk
 
 ## Built avec 
 
